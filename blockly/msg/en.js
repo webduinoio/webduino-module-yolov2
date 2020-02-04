@@ -1,0 +1,1 @@
+MSG.catYoloV2 = "YOLOv2";

@@ -1,0 +1,21 @@
+{
+  "types": [
+    "yolov2_predict_image",
+    "yolov2_callback",
+    "yolov2_dataVal",
+    "yolov2_amount",
+    "yolov2_objName",
+    "yolov2_camera_input"
+  ],
+  "category": "catPlus",
+  "scripts": [
+    "blockly/blocks.js",
+    "blockly/javascript.js"
+  ],
+  "dependencies": [
+    "yolov2.js"
+  ],
+  "msg": "blockly/msg",
+  "blocksMsg": "blockly/msg/blocks",
+  "toolbox": "blockly/toolbox.xml"
+}

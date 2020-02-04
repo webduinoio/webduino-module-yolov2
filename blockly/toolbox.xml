@@ -1,0 +1,89 @@
+<category id="catYoloV2">
+  <block type="yolov2_predict_image_2">
+  <value name="input">
+      <block type="yolov2_camera_input"></block>
+    </value>
+    <value name="model_url">
+      <block type="text">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="threshold">
+      <block type="math_number">
+        <field name="NUM">0.5</field>
+      </block>
+    </value>
+  </block>
+  <block type="yolov2_predict_image_2">
+    <value name="input">
+      <block type="text">
+        <field name="TEXT">https://</field>
+      </block>
+    </value>
+    <value name="model_url">
+      <block type="text">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="threshold">
+      <block type="math_number">
+        <field name="NUM">0.5</field>
+      </block>
+    </value>
+  </block>
+  <block type="variables_set">
+    <field name="VAR">yolov2Returns</field>
+    <value name="VALUE">
+      <block type="yolov2_getSpecificResults">
+        <value name="label">
+          <block type="text">
+            <field name="TEXT">物件</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="yolov2_getobjconfidence">
+    <value name="results_index">
+      <block type="math_number">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+  </block>
+  <block type="yolov2_getobjpositionX">
+    <value name="results_index">
+      <block type="math_number">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+  </block>
+  <block type="yolov2_getobjpositionY">
+    <value name="results_index">
+      <block type="math_number">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+  </block>
+  <block type="yolov2_setthreshold">
+    <value name="NAME">
+      <block type="math_number">
+        <field name="NUM">0.5</field>
+      </block>
+    </value>
+  </block>
+   <block type="yolov2_callback2">
+    <value name="idx">
+      <block type="text">
+        <field name="TEXT">物件</field>
+      </block>
+    </value>
+  </block>
+  <block type="yolov2_dataVal"></block>
+  <block type="yolov2_amount"></block>
+  <block type="yolov2_objName"></block>
+  <block type="yolov2_stop"></block>
+  <block type="yolov2_doPredict"></block>
+  <block type="yolov2_camera_input"></block>
+  <block type="yolov2_modelLabels"></block>
+  <block type="yolov2_allResults"></block>
+</category>
