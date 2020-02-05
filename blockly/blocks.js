@@ -27,7 +27,6 @@ Blockly.Blocks['yolov2_predict_image_2'] = {
     this.appendValueInput("threshold")
         .setCheck("Number")
         .appendField(Blockly.Msg.YoloV2_Threshold);
-    this.setOutput(false, null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -234,8 +233,6 @@ Blockly.Blocks['yolov2_allResults'] = {
 
 Blockly.Blocks['yolov2_getSpecificResults'] = {
   init: function() {
-    // this.appendDummyInput()
-    //     .appendField(Blockly.Msg.YoloV2_SpecificResults);
     this.appendValueInput("label")
         .appendField(Blockly.Msg.YoloV2_SpecificResults)
         .setCheck(null);

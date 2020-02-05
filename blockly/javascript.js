@@ -1,25 +1,9 @@
-Blockly.JavaScript['yolov2_predict_image'] = function(block) {
-  var value_model_url = Blockly.JavaScript.valueToCode(block, 'model_url', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_threshold = Blockly.JavaScript.valueToCode(block, 'threshold', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'await _yolov2_.init(' + value_model_url + ', ' + value_input + ', ' + value_threshold +')';
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
 Blockly.JavaScript['yolov2_predict_image_2'] = function(block) {
   var value_model_url = Blockly.JavaScript.valueToCode(block, 'model_url', Blockly.JavaScript.ORDER_ATOMIC);
   var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
   var value_threshold = Blockly.JavaScript.valueToCode(block, 'threshold', Blockly.JavaScript.ORDER_ATOMIC);
   var code = 'await _yolov2_.init(' + value_model_url + ', ' + value_input + ', ' + value_threshold +');\n';
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-Blockly.JavaScript['yolov2_init'] = function(block) {
-  var value_model_url = Blockly.JavaScript.valueToCode(block, 'model_url', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_threshold = Blockly.JavaScript.valueToCode(block, 'threshold', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'await _yolov2_.init(' + value_model_url + ', ' + value_input + ', ' + value_threshold +')';
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
 };
 
 Blockly.JavaScript['yolov2_callback2'] = function(block) {
@@ -54,7 +38,6 @@ Blockly.JavaScript['yolov2_camera_input'] = function(block) {
     resolution: dropdown_name2,
   })
   var code = '\'' + output + '\'';
-  // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 

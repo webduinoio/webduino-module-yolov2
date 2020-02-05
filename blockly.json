@@ -1,6 +1,6 @@
 {
   "types": [
-    "yolov2_predict_image",
+    "yolov2_predict_image_2",
     "yolov2_callback",
     "yolov2_dataVal",
     "yolov2_amount",

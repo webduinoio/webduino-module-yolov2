@@ -1,6 +1,6 @@
 <category id="catYoloV2">
   <block type="yolov2_predict_image_2">
-  <value name="input">
+    <value name="input">
       <block type="yolov2_camera_input"></block>
     </value>
     <value name="model_url">
@@ -22,7 +22,7 @@
     </value>
     <value name="model_url">
       <block type="text">
-        <field name="TEXT"></field>
+        <field name="TEXT">https://webduinoio.github.io/webduino-module-yolov2/models/yolov2-tiny/model.json</field>
       </block>
     </value>
     <value name="threshold">
