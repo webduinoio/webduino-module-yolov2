@@ -11,6 +11,15 @@
     newScriptElement.text = req.responseText;
     headElement.appendChild(newScriptElement);
   }
+
+  function addHTMLContent() {
+    const container = document.createElement('div');
+    const wrapper = document.createElement('div');
+    container.id = 'yolov2-container';
+    wrapper.id = 'yolov2-wrapper';
+    container.appendChild(wrapper);
+    document.body.appendChild(container);
+  }
   
   function hasGetUserMedia() {
     return !!(navigator.mediaDevices &&
@@ -326,7 +335,7 @@
 
       canvas.setAttribute('height', h);
       canvas.setAttribute('width', w);
-      canvas.style = "display: block";
+      canvas.style = "display: block; width: 100%; height: 100%; position: absolute;";
       console.log('init canvas');
     }
 
@@ -348,6 +357,7 @@
 
       const canvas = this.canvas.el;
       const ctx = this.canvas.ctx;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       // draw the box
       predictResult.forEach(box => {
         const label = box.label + ' ' + box.confidence.toFixed(1);
@@ -395,7 +405,14 @@
 
       if (opts.image) {
         imageTensor.dispose();
-        this.drawImage(canvas, opts.image);
+        if (!this.canvas) {
+          this.setCanvas(canvas, opts.image, opts.size);
+        }
+
+        if (!opts.dontDrawImage) {
+          this.drawImage(canvas, opts.image);
+        }
+
         this.drawBoxes(result, opts.inputSize);
       } else {
         this.render(imageTensor, result, canvas);
@@ -426,7 +443,6 @@
     let labels = {};
     let results = [];
     let outputs = {};
-    let predictInterval = 50, lastRun = Date.now();
     let modelUrl, orgImageSource, threshold;
     const canvas = document.createElement('canvas');
 
@@ -459,6 +475,7 @@
           modelUrl = _modelUrl;
           orgImageSource = _imageSource;
           threshold = _threshold;
+          addHTMLContent();
         }
         await yolov2.init(modelUrl);
         console.log('YOLOv2 initialized.', yolov2.inited, tf.version);
@@ -565,11 +582,6 @@
             if (stopped) {
               console.log('yolov2 is stopped');
               return;
-            } else if ((Date.now() - lastRun) < predictInterval) {
-                window.requestAnimationFrame(predictWithVideo);
-                return;
-            } else {
-                lastRun = Date.now();
             }
 
             const ratioFit = calculateAspectRatioFit(video.width, video.height, netInWidth, netInHeight);
@@ -582,10 +594,10 @@
             results = await yolov2.predictAndRender(imageTensor, canvas, {
                 userThreshold: threshold,
                 image: video,
+                dontDrawImage: true,
                 inputSize: [oc.height, oc.width],
             });
 
-            canvas.style = "width: 100%; height: 100%;";
             // show result
             showResults(results);
             // replay
@@ -604,10 +616,10 @@
             video.height = v.height && v.height.exact || '480';
             video.srcObject = stream;
             video.autoplay = true;
-            video.style = "display: none;";
+            video.style = "display: block; position: absolute; width: 100%; height: 100%;";
 
-            document.body.appendChild(video);
-            document.body.appendChild(canvas);
+            document.getElementById('yolov2-wrapper').appendChild(video);
+            document.getElementById('yolov2-wrapper').appendChild(canvas);
             // add listener
             video.addEventListener('loadedmetadata', () => {
               canvas.setAttribute('width', video.width);
