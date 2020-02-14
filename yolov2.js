@@ -612,10 +612,13 @@
             console.log(`Using video device: ${videoTracks[0].label}`);
             window.stream = stream; // make variable available to browser console
             const v = constraints.video;
-            video.width = v.width && v.width.exact || '640';
-            video.height = v.height && v.height.exact || '480';
+            video.width = v.width && v.width.exact || '320';
+            video.height = v.height && v.height.exact || '240';
             video.srcObject = stream;
             video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.setAttribute('playsinline', true);
             video.style = "display: block; position: absolute; width: 100%; height: 100%;";
 
             document.getElementById('yolov2-wrapper').appendChild(video);
